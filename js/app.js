@@ -56,17 +56,19 @@ CardList.addEventListener('click' ,
 		if (openCards.length == 2) {
 			
 			//reset cards
-			openCards[0].classList.remove('open','show');
-			openCards[1].classList.remove('open','show');
+			setTimeout(function () {
+				openCards[0].classList.remove('open','show');
+				openCards[1].classList.remove('open','show');
 
-			//if cards match
-			if (cardIcons[0] == cardIcons[1]){
-				openCards[0].classList.add('match');
-				openCards[1].classList.add('match');
-			}
+				//if cards match
+				if (cardIcons[0] == cardIcons[1]){
+					openCards[0].classList.add('match');
+					openCards[1].classList.add('match');
+				}
 
-			//reset number of opened cards and icons
-			openCards = [];
-			cardIcons = [];
+				//reset number of opened cards and icons
+				openCards = [];
+				cardIcons = [];
+			}, 300);	
 		}
 });
