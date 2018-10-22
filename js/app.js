@@ -64,5 +64,9 @@ CardList.addEventListener('click' ,
 				openCards[0].classList.add('match');
 				openCards[1].classList.add('match');
 			}
+
+			//reset number of opened cards and icons
+			openCards = [];
+			cardIcons = [];
 		}
 });
