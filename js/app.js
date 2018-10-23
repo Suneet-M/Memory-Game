@@ -37,15 +37,17 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-let CardList = document.querySelector('.deck'); //card deck for click event
+const CardList = document.querySelector('.deck'); //card deck for click event
+const moves = document.querySelector('span.moves'); //moves element
+let count = 0; //move counter
 let openCards = []; //for number of opened cards 
 let cardIcons = []; //for icon matching
 
 function onclick (e) {
 	show(e.target);
-
 	//after 2 clicks
 	if (openCards.length == 2) {
+		updateMoves();
 		setTimeout(function () {
 			resetCard(openCards[0]);
 			resetCard(openCards[1]);
@@ -74,6 +76,11 @@ function fetchIcon (clickedCard) {
 	//fetch clicked card's icon class to compare
 	let icon = clickedCard.firstElementChild.classList.value;
 	cardIcons.push(icon);
+}
+
+function updateMoves () {
+	count++;
+	moves.textContent = count;
 }
 
 function resetCard (openCard) {
