@@ -41,34 +41,47 @@ let CardList = document.querySelector('.deck'); //card deck for click event
 let openCards = []; //for number of opened cards 
 let cardIcons = []; //for icon matching
 
-CardList.addEventListener('click' , 
-	function (e) {
+function onclick (e) {
+	show(e.target);
 
-		//click to show
-		const card = e.target;
-		card.classList.add('open','show');
-		openCards.push(card);
+	//after 2 clicks
+	if (openCards.length == 2) {
+		setTimeout(function () {
+			resetCard(openCards[0]);
+			resetCard(openCards[1]);
 
-		//fetch clicked card's icon's class to compare
-		let icon = card.firstElementChild.classList.value;
-		cardIcons.push(icon);
+			//if cards match
+			if (cardIcons[0] == cardIcons[1]){
+				matchCard(openCards[0]);
+				matchCard(openCards[1]);
+			}
 
-		if (openCards.length == 2) {
-			
-			//reset cards
-			setTimeout(function () {
-				openCards[0].classList.remove('open','show');
-				openCards[1].classList.remove('open','show');
+			//reset number of opened cards and icons
+			openCards = [];
+			cardIcons = [];
+		}, 300);
+	}
+}
 
-				//if cards match
-				if (cardIcons[0] == cardIcons[1]){
-					openCards[0].classList.add('match');
-					openCards[1].classList.add('match');
-				}
+function show (clickedCard) {
+	//click to show
+	clickedCard.classList.add('open','show');
+	openCards.push(clickedCard);
+	fetchIcon(clickedCard);
+}
 
-				//reset number of opened cards and icons
-				openCards = [];
-				cardIcons = [];
-			}, 300);	
-		}
-});
+function fetchIcon (clickedCard) {
+	//fetch clicked card's icon class to compare
+	let icon = clickedCard.firstElementChild.classList.value;
+	cardIcons.push(icon);
+}
+
+function resetCard (openCard) {
+	openCard.classList.remove('open','show');
+}
+
+function matchCard (openCard) {
+	openCard.classList.add('match');
+}
+
+CardList.addEventListener('click' , onclick);
