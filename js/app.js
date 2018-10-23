@@ -42,7 +42,7 @@ const cardList = Array.from(cardDeck.querySelectorAll('li'));
 const moves = document.querySelector('.moves');
 const restart = document.querySelector('.restart');
 let count = 0; //move counter
-let openCards = []; //for number of opened cards 
+let openCards = []; //tracking number of opened cards 
 let cardIcons = []; //for icon matching
 
 function onclick (target) {
@@ -72,6 +72,7 @@ function fetchIcon (clickedCard) {
 function updateMoves (custom) {
 	count++;
 	moves.textContent = count;
+	//for resetting
 	if (custom == 0) {
 		moves.textContent = custom;
 		count = 0;
@@ -79,21 +80,18 @@ function updateMoves (custom) {
 }
 
 function twoClicks () {
-	resetCard(openCards[0]);
-	resetCard(openCards[1]);
+	hideCard(openCards[0]);
+	hideCard(openCards[1]);
 
 	//if cards match
 	if (cardIcons[0] == cardIcons[1]){
 		matchCard(openCards[0]);
 		matchCard(openCards[1]);
 	}
-
-	//reset number of opened cards and icons
-	openCards = [];
-	cardIcons = [];
+	resetTracking();
 }
 
-function resetCard (openCard) {
+function hideCard (openCard) {
 	openCard.classList.remove('open','show');
 }
 
@@ -101,12 +99,19 @@ function matchCard (openCard) {
 	openCard.classList.add('match');
 }
 
+function resetTracking () {
+	//reset number of opened cards and icons
+	openCards = [];
+	cardIcons = [];
+}
+
 function resetGame () {
+	//reset cards
 	for (let card of cardList) {
 		card.classList.remove('open','show','match');
 	}
 	updateMoves(0);
-
+	resetTracking();
 }
 
 cardDeck.addEventListener('click' , function (e){
