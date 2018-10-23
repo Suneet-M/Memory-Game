@@ -109,6 +109,7 @@ function hideCard (openCard) {
 
 function matchCard (openCard) {
 	openCard.classList.add('match');
+	checkCompletion();
 }
 
 function resetTracking () {
@@ -184,4 +185,27 @@ function resetGame () {
 	resetTracking();
 	resetStars();
 	resetTimer();
+}
+
+//
+//GAME COMPLETE
+//
+let complete;//to hole completion value
+function checkCompletion () {
+	//iterate over cards
+	for (let card of cardList) {
+		//check card for class match
+		if (card.classList.contains('match')) {
+			complete = true;
+		}
+		else {
+			complete = false;
+			return;//exit loop
+		}
+	}
+
+	if (complete == true) {
+		stopTimer();
+		console.log('you win');
+	}
 }
