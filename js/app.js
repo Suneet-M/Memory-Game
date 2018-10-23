@@ -37,8 +37,10 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-const CardList = document.querySelector('.deck'); //card deck for click event
-const moves = document.querySelector('span.moves'); //moves element
+const cardDeck = document.querySelector('.deck'); //for click event
+const cardList = Array.from(cardDeck.querySelectorAll('li'));
+const moves = document.querySelector('.moves');
+const restart = document.querySelector('.restart');
 let count = 0; //move counter
 let openCards = []; //for number of opened cards 
 let cardIcons = []; //for icon matching
@@ -67,9 +69,13 @@ function fetchIcon (clickedCard) {
 	cardIcons.push(icon);
 }
 
-function updateMoves () {
+function updateMoves (custom) {
 	count++;
 	moves.textContent = count;
+	if (custom == 0) {
+		moves.textContent = custom;
+		count = 0;
+	}
 }
 
 function twoClicks () {
@@ -95,8 +101,18 @@ function matchCard (openCard) {
 	openCard.classList.add('match');
 }
 
-CardList.addEventListener('click' , function (e){
+function resetGame () {
+	for (let card of cardList) {
+		card.classList.remove('open','show','match');
+	}
+	updateMoves(0);
+
+}
+
+cardDeck.addEventListener('click' , function (e){
 	if (e.target.nodeName === 'LI') {
 		onclick(e.target);
 	}
 });
+
+restart.addEventListener('click' , resetGame);
