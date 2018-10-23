@@ -45,6 +45,15 @@ let count = 0; //move counter
 let openCards = []; //tracking number of opened cards 
 let cardIcons = []; //for icon matching
 
+//
+// card show and match; moves functionality
+//
+cardDeck.addEventListener('click' , function (e){
+	if (e.target.nodeName === 'LI') {
+		onclick(e.target);
+	}
+});
+
 function onclick (target) {
 	if (!openCards.includes(target)) {
 		show(target);
@@ -105,6 +114,11 @@ function resetTracking () {
 	cardIcons = [];
 }
 
+//
+//game reset
+//
+restart.addEventListener('click' , resetGame);
+
 function resetGame () {
 	//reset cards
 	for (let card of cardList) {
@@ -113,11 +127,3 @@ function resetGame () {
 	updateMoves(0);
 	resetTracking();
 }
-
-cardDeck.addEventListener('click' , function (e){
-	if (e.target.nodeName === 'LI') {
-		onclick(e.target);
-	}
-});
-
-restart.addEventListener('click' , resetGame);
