@@ -91,4 +91,8 @@ function matchCard (openCard) {
 	openCard.classList.add('match');
 }
 
-CardList.addEventListener('click' , onclick);
+CardList.addEventListener('click' , function (e){
+	if (e.target.nodeName === 'LI') {
+		onclick(e);
+	}
+});
