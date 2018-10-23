@@ -38,19 +38,20 @@ function shuffle(array) {
  */
 
 const cardDeck = document.querySelector('.deck'); //for click event
-const cardList = Array.from(cardDeck.querySelectorAll('li'));
 const moves = document.querySelector('.moves');
-const restart = document.querySelector('.restart');
 let count = 0; //move counter
 let openCards = []; //tracking number of opened cards 
 let cardIcons = []; //for icon matching
 
 //
-// card show and match; moves functionality
+//CARDs SHOW & MATCH and MOVES FUNCTIONALITY
 //
 cardDeck.addEventListener('click' , function (e){
 	if (e.target.nodeName === 'LI') {
 		onclick(e.target);
+		if (timerId == undefined) {
+			startTimer();
+		}
 	}
 });
 
@@ -117,7 +118,7 @@ function resetTracking () {
 }
 
 //
-//stars functionality
+//STAR FUNCTIONALITY
 //
 let rating = Array.from(document.getElementsByClassName('fa-star'));
 
@@ -146,8 +147,32 @@ function resetStars () {
 }
 
 //
-//game reset
+//TIMER
 //
+const timer = document.querySelector('.timer');
+let time = 0;
+let timerId;
+function startTimer () {
+	timerId = setInterval(function () {
+		time++;
+		timer.textContent = time;
+	}, 1000)
+}
+
+function stopTimer () {
+	clearTimeout(timerId)
+}
+
+function resetTimer () {
+	stopTimer();
+	timer.textContent = 0;
+}
+
+//
+//GAME RESET
+//
+const restart = document.querySelector('.restart');
+const cardList = Array.from(cardDeck.querySelectorAll('li'));
 restart.addEventListener('click' , resetGame);
 
 function resetGame () {
@@ -158,4 +183,5 @@ function resetGame () {
 	updateMoves(0);
 	resetTracking();
 	resetStars();
+	resetTimer();
 }
