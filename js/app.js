@@ -43,25 +43,14 @@ let count = 0; //move counter
 let openCards = []; //for number of opened cards 
 let cardIcons = []; //for icon matching
 
-function onclick (e) {
-	show(e.target);
-	//after 2 clicks
-	if (openCards.length == 2) {
-		updateMoves();
-		setTimeout(function () {
-			resetCard(openCards[0]);
-			resetCard(openCards[1]);
-
-			//if cards match
-			if (cardIcons[0] == cardIcons[1]){
-				matchCard(openCards[0]);
-				matchCard(openCards[1]);
-			}
-
-			//reset number of opened cards and icons
-			openCards = [];
-			cardIcons = [];
-		}, 300);
+function onclick (target) {
+	if (!openCards.includes(target)) {
+		show(target);
+		//after 2 clicks
+		if (openCards.length == 2) {
+			updateMoves();
+			setTimeout(twoClicks,300);
+		}
 	}
 }
 
@@ -83,6 +72,21 @@ function updateMoves () {
 	moves.textContent = count;
 }
 
+function twoClicks () {
+	resetCard(openCards[0]);
+	resetCard(openCards[1]);
+
+	//if cards match
+	if (cardIcons[0] == cardIcons[1]){
+		matchCard(openCards[0]);
+		matchCard(openCards[1]);
+	}
+
+	//reset number of opened cards and icons
+	openCards = [];
+	cardIcons = [];
+}
+
 function resetCard (openCard) {
 	openCard.classList.remove('open','show');
 }
@@ -93,6 +97,6 @@ function matchCard (openCard) {
 
 CardList.addEventListener('click' , function (e){
 	if (e.target.nodeName === 'LI') {
-		onclick(e);
+		onclick(e.target);
 	}
 });
