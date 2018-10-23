@@ -86,6 +86,8 @@ function updateMoves (custom) {
 		moves.textContent = custom;
 		count = 0;
 	}
+	//for star rating
+	checkCount();
 }
 
 function twoClicks () {
@@ -115,6 +117,35 @@ function resetTracking () {
 }
 
 //
+//stars functionality
+//
+let rating = Array.from(document.getElementsByClassName('fa-star'));
+
+function checkCount () {
+	if (count > 24) {
+		reduceStar(0);
+	}
+
+	if (count > 20) {
+		reduceStar(1);
+	}
+
+	if (count > 16) {
+		reduceStar(2);
+	}
+}
+
+function reduceStar (i) {
+	rating[i].classList.add('invisible');
+}
+
+function resetStars () {
+	for (let star of rating) {
+		star.classList.remove('invisible');
+	}
+}
+
+//
 //game reset
 //
 restart.addEventListener('click' , resetGame);
@@ -126,4 +157,5 @@ function resetGame () {
 	}
 	updateMoves(0);
 	resetTracking();
+	resetStars();
 }
