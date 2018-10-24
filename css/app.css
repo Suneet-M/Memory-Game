@@ -103,7 +103,12 @@ h1 {
     display: inline-block;
 }
 
-.fa-star.invisible {
+span.zero::before { /*.score-panel not mentioned to use class for modal as well*/
+    content: '0';
+    margin-right: 2px;
+}
+
+.fa-star.invisible { /*.score-panel not mentioned to use class for modal as well*/
     visibility: hidden;
 }
 
@@ -120,7 +125,7 @@ h1 {
  * Styles for Modal
  */
 
-.modal {
+.modal-back {
     background-color: rgba(0, 0, 0, 0.7);
     position: fixed;
     top: 0;
@@ -130,7 +135,7 @@ h1 {
     display: none;
 }
 
-.modal.show{
+.modal-back.show{
     display: block;
 }
 

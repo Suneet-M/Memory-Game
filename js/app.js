@@ -119,8 +119,9 @@ function resetTracking () {
  * STAR RATING
  *
  */
-
-let rating = Array.from(document.getElementsByClassName('fa-star'));
+const stars = document.querySelector('.stars');
+const starText = stars.querySelector('span');
+let rating = Array.from(stars.getElementsByClassName('fa-star'));
 
 function checkCount () {
 	if (count > 24) {
@@ -138,11 +139,19 @@ function checkCount () {
 
 function reduceStar (i) {
 	rating[i].classList.add('invisible');
+	if (i == 0) {
+		zeroStars();
+	}
+}
+
+function zeroStars () {
+	starText.classList.add('zero');
 }
 
 function resetStars () {
 	for (let star of rating) {
 		star.classList.remove('invisible');
+		starText.classList.remove('zero');
 	}
 }
 
@@ -223,8 +232,7 @@ function gameComplete () {
 	const finalTime = modal.querySelector('.final-time')
 
 	//fetch rating from score panel
-	rating.innerHTML =
-		document.querySelector('.stars').innerHTML;
+	rating.innerHTML = stars.innerHTML;
 	//use previously defined variables for moves and time
 	finalMoves.textContent = `${count} Moves`;
 	finalTime.textContent = `${time} Secs`;
@@ -240,7 +248,7 @@ modal.querySelector('#reset').addEventListener('click',
 	});
 
 function toggleModal () {
-	document.querySelector('.modal')
+	document.querySelector('.modal-back')
 			.classList.toggle('show');
 }
 
