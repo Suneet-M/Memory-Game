@@ -194,10 +194,11 @@ function resetGame () {
 }
 
 /*
- * GAME COMPLETE 
+ * GAME COMPLETE
  */
 
 let complete;//to hold completion value
+const modal = document.querySelector('.modal-body');
 function checkCompletion () {
 	//iterate over cards
 	for (let card of cardList) {
@@ -212,7 +213,35 @@ function checkCompletion () {
 	}
 
 	if (complete == true) {
-		stopTimer();
-		console.log('you win');
+		gameComplete();
 	}
 }
+
+function gameComplete () {
+	const rating = modal.querySelector('.rating');
+	const finalMoves = modal.querySelector('.final-moves')
+	const finalTime = modal.querySelector('.final-time')
+
+	//fetch rating from score panel
+	rating.innerHTML =
+		document.querySelector('.stars').innerHTML;
+	//use previously defined variables for moves and time
+	finalMoves.textContent = `${count} Moves`;
+	finalTime.textContent = `${time} Secs`;
+
+	stopTimer();
+	toggleModal();
+}
+
+modal.querySelector('#reset').addEventListener('click',
+	function () {
+		resetGame();
+		toggleModal();
+	});
+
+function toggleModal () {
+	document.querySelector('.modal')
+			.classList.toggle('show');
+}
+
+modal.querySelector('#close').addEventListener('click', toggleModal);
