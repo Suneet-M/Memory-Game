@@ -129,14 +129,17 @@ span.zero::before { /*.score-panel not mentioned to use class for modal as well*
     background-color: rgba(0, 0, 0, 0.7);
     position: fixed;
     top: 0;
-    left: 0;
+    bottom: 100vh;
+    left: 100vw;
     right: 0;
-    bottom: 0;
-    display: none;
+    opacity: 0;
+    transition: all 400ms ease;
 }
 
 .modal-back.show{
-    display: block;
+    bottom: 0;
+    left: 0;
+    opacity: 1;
 }
 
 .modal-body{
