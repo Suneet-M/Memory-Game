@@ -52,11 +52,18 @@ cardDeck.addEventListener('click' , function (e){
 });
 
 function onclick (target) {
-	if (!openCards.includes(target)) {
+	//to avoid getting a match by clicking on same card or previous matched card
+	if (!openCards.includes(target) && 
+		!target.classList.contains('match')) {
 		show(target);
 		//after 2 clicks
 		if (openCards.length == 2) {
 			updateMoves();
+			//if cards match
+			if (cardIcons[0] == cardIcons[1]){
+				matchCard(openCards[0]);
+				matchCard(openCards[1]);
+			}
 			setTimeout(twoClicks,300);
 		}
 	}
@@ -90,12 +97,6 @@ function updateMoves (custom) {
 function twoClicks () {
 	hideCard(openCards[0]);
 	hideCard(openCards[1]);
-
-	//if cards match
-	if (cardIcons[0] == cardIcons[1]){
-		matchCard(openCards[0]);
-		matchCard(openCards[1]);
-	}
 	resetTracking();
 }
 
