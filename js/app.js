@@ -1,13 +1,7 @@
 /*
- * Create a list that holds all of your cards
- */
-
-
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
+ *
+ * SHUFFLE CARDS
+ *
  */
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -25,27 +19,29 @@ function shuffle(array) {
     return array;
 }
 
+const cardDeck = document.querySelector('.deck');
+shuffleCards();
+
+function shuffleCards () {
+	const cardsToShuffle = Array.from(document.querySelectorAll('.deck li'));
+	const shuffledCards = shuffle(cardsToShuffle);
+
+	for (let card of shuffledCards) {
+		cardDeck.appendChild(card);
+	}
+}
 
 /*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+ *
+ * CARDs SHOW & MATCH and MOVES FUNCTIONALITY
+ *
  */
 
-const cardDeck = document.querySelector('.deck'); //for click event
 const moves = document.querySelector('.moves');
 let count = 0; //move counter
 let openCards = []; //tracking number of opened cards 
 let cardIcons = []; //for icon matching
 
-//
-//CARDs SHOW & MATCH and MOVES FUNCTIONALITY
-//
 cardDeck.addEventListener('click' , function (e){
 	if (e.target.nodeName === 'LI') {
 		onclick(e.target);
@@ -118,9 +114,12 @@ function resetTracking () {
 	cardIcons = [];
 }
 
-//
-//STAR FUNCTIONALITY
-//
+/*
+ *
+ * STAR RATING
+ *
+ */
+
 let rating = Array.from(document.getElementsByClassName('fa-star'));
 
 function checkCount () {
@@ -147,9 +146,12 @@ function resetStars () {
 	}
 }
 
-//
-//TIMER
-//
+/*
+ *
+ * TIMER
+ *
+ */
+
 const timer = document.querySelector('.timer');
 let time = 0;
 let timerId;
@@ -169,9 +171,12 @@ function resetTimer () {
 	timer.textContent = 0;
 }
 
-//
-//GAME RESET
-//
+/*
+ *
+ * GAME RESET
+ *
+ */
+
 const restart = document.querySelector('.restart');
 const cardList = Array.from(cardDeck.querySelectorAll('li'));
 restart.addEventListener('click' , resetGame);
@@ -181,16 +186,18 @@ function resetGame () {
 	for (let card of cardList) {
 		card.classList.remove('open','show','match');
 	}
+	shuffleCards();
 	updateMoves(0);
 	resetTracking();
 	resetStars();
 	resetTimer();
 }
 
-//
-//GAME COMPLETE
-//
-let complete;//to hole completion value
+/*
+ * GAME COMPLETE 
+ */
+
+let complete;//to hold completion value
 function checkCompletion () {
 	//iterate over cards
 	for (let card of cardList) {
