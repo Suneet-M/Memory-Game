@@ -19,6 +19,7 @@
   
 ## Future Updates
 
-- Use animations for card show, match and no-match.
-- Store scores of each game and show best score in modal.
-- A start page for selecting difficulty.
+- [x] Use animations for card show, match and no-match.
+- [ ] Check code for ES6 guideline compliance.
+- [ ] A start page for selecting difficulty.
+- [ ] Store scores of each game and show best score in modal.

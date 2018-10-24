@@ -64,14 +64,18 @@ function onclick (target) {
 				matchCard(openCards[0]);
 				matchCard(openCards[1]);
 			}
-			setTimeout(twoClicks,300);
+			else {
+				noMatch(openCards[0]);
+				noMatch(openCards[1]);
+			}
+			twoClicks();
 		}
 	}
 }
 
 function show (clickedCard) {
 	//click to show
-	clickedCard.classList.add('open','show');
+	clickedCard.classList.add('open','show','animated','flipInY');
 	openCards.push(clickedCard);
 	fetchIcon(clickedCard);
 }
@@ -101,11 +105,23 @@ function twoClicks () {
 }
 
 function hideCard (openCard) {
-	openCard.classList.remove('open','show');
+	openCard.classList.remove('open');
 }
-
+function noMatch(openCard) {
+	openCard.classList.remove('flipInY');
+	openCard.classList.add('nomatch','wobble');
+	setTimeout(
+		function () {
+			openCard.classList.remove('show','nomatch','animated','wobble');
+		}, 600)
+}
 function matchCard (openCard) {
-	openCard.classList.add('match');
+	openCard.classList.remove('flipInY')	
+	openCard.classList.add('match','rubberBand');
+	setTimeout(
+		function () {
+			openCard.classList.remove('show','animated','rubberBand');
+		}, 500)
 	checkCompletion();
 }
 
