@@ -16,6 +16,11 @@
   - 0 Stars above 22 moves
 - Reset button on the score-panel can be used anytime to reset star rating, timer and moves.
 - On completion, your score will be displayed along with an option to play the game again with a fresh set of card sequence.
+
+## Animations
+All animations in code use animate.css.\
+A very nice and easy way to animate elements, developed by [Daniel Eden](https://github.com/daneden).\
+Github repo can be found [here](https://github.com/daneden/animate.css).
   
 ## Future Updates
 
