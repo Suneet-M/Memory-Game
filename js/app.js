@@ -141,15 +141,15 @@ const starText = stars.querySelector('span');
 let rating = Array.from(stars.getElementsByClassName('fa-star'));
 
 function checkCount () {
-	if (count > 24) {
+	if (count > 21) {
 		reduceStar(0);
 	}
 
-	if (count > 20) {
+	if (count > 17) {
 		reduceStar(1);
 	}
 
-	if (count > 16) {
+	if (count > 13) {
 		reduceStar(2);
 	}
 }

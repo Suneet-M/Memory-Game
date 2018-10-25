@@ -22,5 +22,5 @@
 - [x] Use animations for card show, match and no-match.
 - [ ] Apply animation to modal using animate.css
 - [ ] Check code for ES6 guideline compliance.
-- [ ] A start page for selecting difficulty.
+- [ ] A start page for instructions and selecting difficulty.
 - [ ] Store scores of each game and show best score in modal.
