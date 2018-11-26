@@ -1,4 +1,6 @@
 # Memory Game
+Simply click [here](https://suneet-m.github.io/Memory-Game/) to launch the game.
+Please go through [instructions](#instructions) before playing.
 
 ## Instructions
 
