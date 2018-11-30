@@ -1,5 +1,6 @@
 # Memory Game
-Simply click [here](https://suneet-m.github.io/Memory-Game/) to launch the game.
+Simply click [here](https://suneet-m.github.io/Memory-Game/) to launch the game.\
+This game is playable on mobile devices as well, but are not completely optimized for the screen size. Optimizations are WIP.\
 Please go through [instructions](#instructions) before playing.
 
 ## Instructions
